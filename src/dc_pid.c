@@ -10,9 +10,9 @@
 #include "digital_ctrl.h"
 
 void dc_pid_init(struct dc_pid *pid,
-                 float ref,
-                 float p, float i, float d,
-                 float out_max, float out_min)
+                 dc_t ref,
+                 dc_t p, dc_t i, dc_t d,
+                 dc_t out_max, dc_t out_min)
 {
     pid->ref = ref;
     pid->feed_back = 0;
@@ -25,9 +25,9 @@ void dc_pid_init(struct dc_pid *pid,
     pid->out_min = out_min;
 }
 
-float dc_pid_calc(struct dc_pid *pid)
+dc_t dc_pid_calc(struct dc_pid *pid)
 {
-    float error, integral, out;
+    dc_t error, integral, out;
 
     error = pid->ref - pid->feed_back;
     pid->sum_error += error;
@@ -47,9 +47,9 @@ float dc_pid_calc(struct dc_pid *pid)
     return out;
 }
 
-float dc_pi_calc(struct dc_pid *pid)
+dc_t dc_pi_calc(struct dc_pid *pid)
 {
-    float error, integral, out;
+    dc_t error, integral, out;
 
     error = pid->ref - pid->feed_back;
     pid->sum_error += error;
