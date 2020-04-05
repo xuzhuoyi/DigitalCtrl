@@ -31,9 +31,9 @@ dc_t dc_pid_calc(struct dc_pid *pid)
 
     error = pid->ref - pid->feed_back;
     pid->sum_error += error;
-    pid->pre_error = error;
     integral = pid->i * pid->sum_error;
     out = pid->p * error + integral + pid->d * (pid->pre_error - error);
+    pid->pre_error = error;
 
     if (out > pid->out_max)
     {
